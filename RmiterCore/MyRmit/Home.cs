@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace RmitCore.MyRmit
+namespace RmiterCore.MyRmit
 {
     [JsonObject]
     public class Home

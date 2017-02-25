@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace RmitCore
+namespace RmiterCore.MyRmit
 {
     public class MyRmitPortal
     {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace RmitCore.MyRmit
+namespace RmiterCore.MyRmit
 {
     [JsonObject]
     public class MyDetails

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace RmitCore.MyRmit.Result
+namespace RmiterCore.MyRmit.Result
 {
     [JsonObject]
     public class TermsAndResult

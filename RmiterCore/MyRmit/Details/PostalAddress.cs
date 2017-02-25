@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace RmitCore.MyRmit.Details
+namespace RmiterCore.MyRmit.Details
 {
     [JsonObject]
     public class PostalAddress

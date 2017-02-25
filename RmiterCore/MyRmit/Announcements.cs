@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace RmitCore.MyRmit
+namespace RmiterCore.MyRmit
 {
     [JsonObject]
     public class Announcements

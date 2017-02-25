@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace RmitCore.MyRmit.Details
+namespace RmiterCore.MyRmit.Details
 {
     [JsonObject]
     public class HomeAddress

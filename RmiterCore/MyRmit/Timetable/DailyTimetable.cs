@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace RmitCore.MyRmit.Timetable
+namespace RmiterCore.MyRmit.Timetable
 {
     [JsonObject]
     public class DailyTimetable

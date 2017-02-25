@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace RmitCore.MyRmit.Converter
+namespace RmiterCore.MyRmit.Converter
 {
     // This is a workaround for converting the Unix timestamp included in JSON from school server,
     //   to C# DateTime class, which is easier to read later.
@@ -21,7 +21,7 @@ namespace RmitCore.MyRmit.Converter
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            var timeStamp = long.Parse((string)reader.Value);
+            var timeStamp = long.Parse(reader.Value.ToString());
             return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(timeStamp);
         }
 

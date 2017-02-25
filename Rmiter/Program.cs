@@ -7,7 +7,6 @@ using System.Net;
 using System.Security;
 using RmiterCore;
 using RmiterCore.MyRmit;
-using System.Diagnostics;
 
 namespace RmiterDemo
 {
@@ -51,7 +50,6 @@ namespace RmiterDemo
             Console.WriteLine("\n[Info] Please wait...");
 
             CookieContainer cookie = casLogin.RunCasLogin(username, password).Result;
-            Debug.WriteLine(password.ToString());
 
             // Clear up the password variable to ensure it's not being (easily) captured later
             password = "";

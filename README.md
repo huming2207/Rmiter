@@ -6,7 +6,7 @@ An opensource, pure & native .NET/C# library and client for RMIT University onli
 
 I made this project as I hope I can write a simiular [MonashTimetable](http://joshparnham.com/projects/monash-timetable/) app for RMIT University.
 
-This project and its source code are not affiliated with RMIT University. It also contains some API reverse engineerings which I've been inquired and later granted permissions orally from IT Service staff in RMIT (those who work in Level 3, Building 80), though they still hold the API copyrights and management rights.
+This project and its source code are not affiliated with RMIT University. Meanwhile, it also contains some API reverse engineerings which I've inquired and granted permissions orally from IT Service staff in RMIT (those who work in Level 3, Building 80), though they still hold the API copyrights and management rights.
 
 This project can only be used as accessing your own personal data, not others if you don't know the accounts. So it is **NOT** a illegal hacking tool.
 

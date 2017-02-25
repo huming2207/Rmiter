@@ -49,6 +49,9 @@
   <ItemGroup>
     <Compile Include="InitialToken.cs" />
     <Compile Include="MyRmit\Announcements.cs" />
+    <Compile Include="MyRmit\Details\HomeAddress.cs" />
+    <Compile Include="MyRmit\Details\PostalAddress.cs" />
+    <Compile Include="MyRmit\MyDetails.cs" />
     <Compile Include="MyRmit\Timetable\DailyTimetable.cs" />
     <Compile Include="MyRmit\Timetable\WeeklyTimetable.cs" />
     <Compile Include="MyRmit\Converter\UnixTimestampConverter.cs" />
@@ -64,5 +67,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

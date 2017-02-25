@@ -15,7 +15,7 @@ namespace RmiterCore
         // CookieContainer declaration
         private CookieContainer cookieContainer = new CookieContainer();
 
-        public async Task<bool> DoLogin(string username, string password, string pathStr = "/rmitcas/login")
+        public async Task<CookieContainer> RunCasLogin(string username, string password, string pathStr = "/rmitcas/login")
         {
             var client = _CasHttpClient();
 
@@ -37,11 +37,11 @@ namespace RmiterCore
 
             if (responseStr.Contains("Log In Successful") || responseStr.Contains("You have successfully logged into the Central Authentication Service"))
             {
-                return true;
+                return cookieContainer;
             }
             else
             {
-                return false;
+                return null;
             }
         }
 

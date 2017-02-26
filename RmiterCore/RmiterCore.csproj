@@ -48,6 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InitialToken.cs" />
+    <Compile Include="LibraryInfo\InfoParser.cs" />
+    <Compile Include="LibraryInfo\OpeningHours.cs" />
     <Compile Include="MyRmit\Announcements.cs" />
     <Compile Include="MyRmit\Details\HomeAddress.cs" />
     <Compile Include="MyRmit\Details\PostalAddress.cs" />
@@ -63,6 +65,7 @@
     <Compile Include="MyRmit\ClassTimetable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CasLogin.cs" />
+    <Compile Include="UserAgentGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

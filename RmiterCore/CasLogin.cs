@@ -22,7 +22,7 @@ namespace RmiterCore
             var initialResult = await _GetInitialToken(client);
             // Add a fake User-Agent header temporarily in order to make it easier to debug
             // will remove or change to another (own) User-Agent later
-            client.DefaultRequestHeaders.Add("User-Agent", _GenerateUserAgent());
+            client.DefaultRequestHeaders.Add("User-Agent", UserAgentGenerator.GenerateUserAgent());
 
             // Post content, including username, password, LT token and something else
             string postContent =
@@ -54,8 +54,6 @@ namespace RmiterCore
             // Get the HTML string
             var response = await client.GetAsync(pathStr); 
             string htmlStr = await response.Content.ReadAsStringAsync();
-            Debug.WriteLine("[DEBUG] Got initial cookie:: {0}", cookieContainer.GetCookieHeader(new Uri("https://sso-cas.rmit.edu.au")));
-
 
             // Load HTML string to HAP
             var htmlDoc = new HtmlDocument();
@@ -78,12 +76,7 @@ namespace RmiterCore
         }
 
 
-        private string _GenerateUserAgent(string version = "1.0")
-        {
-            string userAgent = string.Format("RmiterCore/{0} (OS: {1}; CLR: {2})", version, Environment.OSVersion.ToString(), Environment.Version.ToString());
-            Debug.WriteLine(userAgent);
-            return userAgent;
-        }
+
 
         private HttpClient _CasHttpClient(string baseUrl = "https://sso-cas.rmit.edu.au")
         {

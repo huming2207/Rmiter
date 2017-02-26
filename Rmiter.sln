@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RmiterDemo", "Rmiter\Rmiter
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RmiterCore", "RmiterCore\RmiterCore.csproj", "{46E29649-5118-4A4A-B436-A8FBEE253625}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RmiterWpf", "RmiterWpf\RmiterWpf.csproj", "{D10B6FC1-93BB-405A-AC4F-FAD93FFF6FD9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{46E29649-5118-4A4A-B436-A8FBEE253625}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46E29649-5118-4A4A-B436-A8FBEE253625}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46E29649-5118-4A4A-B436-A8FBEE253625}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D10B6FC1-93BB-405A-AC4F-FAD93FFF6FD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D10B6FC1-93BB-405A-AC4F-FAD93FFF6FD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D10B6FC1-93BB-405A-AC4F-FAD93FFF6FD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D10B6FC1-93BB-405A-AC4F-FAD93FFF6FD9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

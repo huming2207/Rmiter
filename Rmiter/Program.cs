@@ -7,6 +7,7 @@ using System.Net;
 using System.Security;
 using RmiterCore;
 using RmiterCore.MyRmit;
+using RmiterCore.LibraryInfo;
 
 namespace RmiterDemo
 {
@@ -15,6 +16,8 @@ namespace RmiterDemo
         static void Main(string[] args)
         {
             CasLogin casLogin = new CasLogin();
+
+            Console.WriteLine("[Demo #1] Get myRMIT announcement messages' title");
 
             // Get username
             Console.Write("[Login] Student ID: ");
@@ -73,6 +76,16 @@ namespace RmiterDemo
             {
                 Console.WriteLine("[Title] \"{0}\"", announcement.Title);
             }
+
+            Console.WriteLine("\n[Info] Demo #1 finished, continue on the next one...");
+            Console.WriteLine("[Demo #2] Get Carlton library's opening hour, DOES NOT need to login this time.");
+
+            var libraryInfoParser = new InfoParser();
+            var libraryInfoResult = libraryInfoParser.GetOpeningHours().Result;
+
+            Console.Write("[Info] Today's Carlton library opening hour is: ");
+
+            Console.WriteLine(libraryInfoResult.CarltonLibrary);
 
             Console.WriteLine("\n\n[Info] Demo finished. Press any key to exit.");
             Console.ReadKey();

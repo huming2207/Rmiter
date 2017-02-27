@@ -7,6 +7,7 @@ using System.Net;
 using System.Security;
 using RmiterCore;
 using RmiterCore.MyRmit;
+using RmiterCorePcl.MyRmit;
 using RmiterCore.LibraryInfo;
 
 namespace RmiterDemo
@@ -15,7 +16,7 @@ namespace RmiterDemo
     {
         static void Main(string[] args)
         {
-            CasLogin casLogin = new CasLogin();
+            RmiterCorePcl.CasLogin casLogin = new RmiterCorePcl.CasLogin();
 
             Console.WriteLine("[Demo #1] Get myRMIT announcement messages' title");
 
@@ -69,7 +70,7 @@ namespace RmiterDemo
             }
 
             Console.WriteLine("[Info] Grabbing announcement messages' title...\n\n");
-            MyRmitPortal portal = new MyRmitPortal(cookie);
+            RmiterCorePcl.MyRmit.MyRmitPortal portal = new RmiterCorePcl.MyRmit.MyRmitPortal(cookie);
             var homeObject = portal.GetHomeMessages().Result;
 
             foreach(var announcement in homeObject.Announcements)

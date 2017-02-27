@@ -21,8 +21,8 @@ I made this project as I hope I can write a similar [MonashTimetable](http://jos
  - [x] CAS (Central Authentication Service) login simulation **(i.e.WE DON'T NEED web browser or webviews any more!)**
  - [x] myRMIT Portal data handling, **including timetables (Working in progress)**
  - [x] Library Timetable parsing
+ - [ ] **"Portablize" class library (merging, changing HTML parser etc)**
  - [ ] Library search 
- - [ ] **Merge classic library to Portable Class Library (need changing HTML parser)**
  - [ ] Blackboard data handling (Future planned)
  
 ### "Frontend"

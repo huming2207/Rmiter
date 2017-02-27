@@ -33,7 +33,7 @@ I made this project as I hope I can write a similar [MonashTimetable](http://jos
 
 ## Example (For PCL Library)
 
-**This example illustrate the procedure of **
+**This example illustrate the procedure of reading your myRMIT announcements' title.**
 
 ```csharp
 string username = "s1234567";

@@ -48,42 +48,42 @@ namespace RmiterCore.MyRmit
             return jsonObject;
         }
 
-        public async Task<MyRmit.Home> GetHomeMessages()
+        public async Task<Home> GetHomeMessages()
         {
-            var result = await _GetDataAsync<MyRmit.Home>("/service/announcements");
+            var result = await _GetDataAsync<Home>("/service/announcements");
             return result;
         }
 
-        public async Task<MyRmit.ClassTimetable> GetCurrentClassTimetable()
+        public async Task<ClassTimetable> GetCurrentClassTimetable()
         {
             // Get an Unix timestamp in milliseconds
             Int64 unixTimestamp = (Int64)(DateTime.Now.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
             string path = string.Format("/service/myclasstimetable?time={0}", unixTimestamp.ToString());
-            var result = await _GetDataAsync<MyRmit.ClassTimetable>(path);
+            var result = await _GetDataAsync<ClassTimetable>(path);
             return result;
         }
 
-        public async Task<MyRmit.ClassTimetable> GetSpecificClassTimetable(DateTime specificDate)
+        public async Task<ClassTimetable> GetSpecificClassTimetable(DateTime specificDate)
         {
             // Grab a current time string in format like "250217" (indicating 25 Feb, 2017)
             string dateStrInDigits = specificDate.ToString("ddmmyy");
             Int64 unixTimestamp = (Int64)(DateTime.Now.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
             string path = string.Format("/service/myclasstimetable/{0}?time={1}", dateStrInDigits, unixTimestamp.ToString());
-            var result = await _GetDataAsync<MyRmit.ClassTimetable>(path);
+            var result = await _GetDataAsync<ClassTimetable>(path);
             return result;
         }
 
-        public async Task<MyRmit.MyResult> GetMyResult()
+        public async Task<MyResult> GetMyResult()
         {
-            var result = await _GetDataAsync<MyRmit.MyResult>("/service/myexamresults/new");
+            var result = await _GetDataAsync<MyResult>("/service/myexamresults/new");
             return result;
         }
 
-        public async Task<MyRmit.MyDetails> GetMyDetails()
+        public async Task<MyDetails> GetMyDetails()
         {
             Int64 unixTimestamp = (Int64)(DateTime.Now.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
             string path = string.Format("/service/mydetails?time={0}", unixTimestamp.ToString());
-            var result = await _GetDataAsync<MyRmit.MyDetails>(path);
+            var result = await _GetDataAsync<MyDetails>(path);
             return result;
         }
 

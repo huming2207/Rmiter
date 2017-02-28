@@ -11,7 +11,7 @@ namespace RmiterCore
     {
         internal static string GenerateUserAgent(string version = "1.0")
         {
-            string userAgent = string.Format("RmiterCore/{0} (OS: {1}; CLR: {2})", version, Environment.OSVersion.ToString(), Environment.Version.ToString());
+            string userAgent = string.Format("RmiterCore/{0}", version);
             Debug.WriteLine(userAgent);
             return userAgent;
         }

@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
-using HtmlAgilityPack;
+using Ivony.Html;
+using Ivony.Html.Parser;
 
 namespace RmiterCore.LibraryInfo
 {
@@ -26,27 +27,43 @@ namespace RmiterCore.LibraryInfo
         {
             // Declare HttpClient
             var httpClient = _LibraryHttpClient();
-            string infoHtml = await httpClient.GetStringAsync("/hours/today.php");
+            string infoRawHtml = await httpClient.GetStringAsync("/hours/today.php");
 
             // Workaround: when the library is closed, the </td> tag is missing,
             //   which causes the HAP engine cannot parse the HTML properly.
-            // (i.e. they wrote "<td>CLOSED" instead of the correct one which is "<td>CLOSED</td>")
-            if (infoHtml.Contains("<td>CLOSED") && !infoHtml.Contains("<td>CLOSED</td>"))
+            // (i.e. they wrote "<td>CLOSED" instead of the "correct" one which is "<td>CLOSED</td>")
+            if (infoRawHtml.Contains("<td>CLOSED") && !infoRawHtml.Contains("<td>CLOSED</td>"))
             {
-                infoHtml.Replace("<td>CLOSED", "<td>CLOSED</td>");
+                infoRawHtml.Replace("<td>CLOSED", "<td>CLOSED</td>");
             }
 
-            // Prepare to parse via HAP engine
-            var htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(infoHtml);
+            // Declare and prepare for the Jumony engine
+            var jumonyParser = new JumonyParser();
+            var htmlDoc = jumonyParser.Parse(infoRawHtml);
+
+            // Grab all contents with "<td>" tags
+            var tableContents = htmlDoc.Find("td");
+            var pickedList = new List<string>();
+            
+            for(int index = 1; index <= 10; index++)
+            {
+                string tableContent = tableContents.ElementAt(index - 1).InnerText();
+
+                // Have a look at the structure of the table and you'll know why.
+                // Only the even-number-index content is the REAL time string.
+                if(index % 2 == 0)
+                {
+                    pickedList.Add(tableContent);
+                }
+            }
 
             var infoResult = new OpeningHours()
             {
-                CarltonLibrary = htmlDoc.DocumentNode.SelectNodes("//*[@id='iframecontent']")[0].SelectNodes("//tr[4]/td[2]")[0].InnerText,
-                SwanstonLibrary = htmlDoc.DocumentNode.SelectNodes("//*[@id='iframecontent']")[0].SelectNodes("//tr[5]/td[2]")[0].InnerText,
-                BrunswickLibrary = htmlDoc.DocumentNode.SelectNodes("//*[@id='iframecontent']")[0].SelectNodes("//tr[1]/td[2]")[0].InnerText,
-                BundooraLibrary = htmlDoc.DocumentNode.SelectNodes("//*[@id='iframecontent']")[0].SelectNodes("//tr[2]/td[2]")[0].InnerText,
-                BundooraEastLibrary = htmlDoc.DocumentNode.SelectNodes("//*[@id='iframecontent']")[0].SelectNodes("//tr[3]/td[2]")[0].InnerText
+                BrunswickLibrary = pickedList[0],
+                BundooraLibrary = pickedList[1],
+                BundooraEastLibrary = pickedList[2],
+                CarltonLibrary = pickedList[3],
+                SwanstonLibrary = pickedList[4]
             };
 
             return infoResult;

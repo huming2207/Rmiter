@@ -5,8 +5,10 @@ using System.Text;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using HtmlAgilityPack;
 using System.Diagnostics;
+using Ivony.Html;
+using Ivony.Html.Parser;
+using Ivony.Parser;
 
 namespace RmiterCore
 {
@@ -19,9 +21,7 @@ namespace RmiterCore
         {
             var client = _CasHttpClient();
 
-            // Add a fake User-Agent header temporarily in order to make it easier to debug
-            // will remove or change to another (own) User-Agent later
-            client.DefaultRequestHeaders.Add("User-Agent", UserAgentGenerator.GenerateUserAgent());
+            // Get the Lt token and JSESSIONID token
             var initialResult = await _GetInitialToken(client);
 
             // Post content, including username, password, LT token and something else
@@ -32,6 +32,7 @@ namespace RmiterCore
             HttpContent httpContent = new StringContent(postContent, Encoding.UTF8, "application/x-www-form-urlencoded");
             var httpResponse = await client.PostAsync(initialResult.RedirectUrl, httpContent);
             string responseStr = await httpResponse.Content.ReadAsStringAsync();
+
 
             Debug.WriteLine("[DEBUG] Login command finished, response: " + responseStr);
 
@@ -47,42 +48,35 @@ namespace RmiterCore
 
         private async Task<InitialToken> _GetInitialToken(HttpClient client, string pathStr = "/rmitcas/login")
         {
-            // Add a fake User-Agent header temporarily in order to make it easier to debug
-            // will remove or change to another (own) User-Agent later
-            // client.DefaultRequestHeaders.Add("User-Agent", _GenerateUserAgent());
+            // Grab the page from RMIT CAS server
+            var httpClient = client;
+            string rawHtml = await httpClient.GetStringAsync(pathStr);
 
-            // Get the HTML string
-            string htmlStr = await client.GetStringAsync(pathStr); 
+            // Prepare Jumony Parser
+            var jumonyParser = new JumonyParser();
+            var htmlDoc = jumonyParser.Parse(rawHtml);
+            
+            // Use Jumony Parser engine to parse those two tokens
+            string ltTokenStr = htmlDoc.FindFirst("input[name=\"lt\"]").Attribute("value").Value();
+            string redirectUrlStr = htmlDoc.FindFirst("form[id=\"fm1\"]").Attribute("action").Value();
 
-            // Load HTML string to HAP
-            var htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(htmlStr);
+            // Split JSESSIONID Token from   
+            string jsessionId = redirectUrlStr.Split('=')[1];
 
-            // Parse the Lt token via HAP
-            var mainNode = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"fm1\"]");
-            var inputNode = mainNode[0].SelectNodes("//input");
-            string ltTokenStr = inputNode[2].Attributes["value"].Value;
-
-            // Parse the redirection URL and JSESSION token via HAP
-            string redirUrlStr = mainNode[0].Attributes["action"].Value;
-            string jsessionId = redirUrlStr.Split('=')[1];
-
-            // Tweak: add JSESSIONID to cookie to ensure it works later
-            // cookieContainer.Add(new Uri("https://sso-cas.rmit.edu.au"), new Cookie("JSESSIONID", jsessionId));
 
             // Prepare the result and return
-            return new InitialToken { JsessionToken = jsessionId, LtToken = ltTokenStr, RedirectUrl = redirUrlStr };
+            return new InitialToken { JsessionToken = jsessionId, LtToken = ltTokenStr, RedirectUrl = redirectUrlStr };
+
         }
-
-
-
 
         private HttpClient _CasHttpClient(string baseUrl = "https://sso-cas.rmit.edu.au")
         {
             var clientHandler = new HttpClientHandler()
             {
+                
                 CookieContainer = cookieContainer
             };
+
 
             // HttpClient declaration
             var client = new HttpClient(clientHandler)

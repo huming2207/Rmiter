@@ -35,6 +35,8 @@
   <ItemGroup>
     <Compile Include="CasLogin.cs" />
     <Compile Include="InitialToken.cs" />
+    <Compile Include="LibraryInfo\InfoParser.cs" />
+    <Compile Include="LibraryInfo\OpeningHours.cs" />
     <Compile Include="MyRmit\Announcements.cs" />
     <Compile Include="MyRmit\ClassTimetable.cs" />
     <Compile Include="MyRmit\Converter\UnixTimestampConverter.cs" />

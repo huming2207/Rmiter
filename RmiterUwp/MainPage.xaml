@@ -47,7 +47,7 @@
                      For the list view, original example came from here:
                        http://stackoverflow.com/questions/33339255/how-to-use-listview-in-universal-windows-platformwindows-10-app 
                     -->
-                    <ListView HorizontalAlignment="Left" Grid.Column="1" Grid.Row="4" Height="500" Margin="-250,-250,0,0" VerticalAlignment="Top" Width="350" Grid.RowSpan="5" Grid.ColumnSpan="2">
+                    <ListView x:Name="AnnouncementList" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="4" Height="500" Margin="-250,-250,0,0" VerticalAlignment="Top" Width="350" Grid.RowSpan="5" Grid.ColumnSpan="2">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>

@@ -20,6 +20,8 @@ using RmiterCoreUwp.MyRmit;
 using RmiterCoreUwp.Errors;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
+using System.Diagnostics;
 
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -32,7 +34,7 @@ namespace RmiterUwp
     public sealed partial class MainPage : Page
     {
         // RmiterCoreUwp CookieContainer declaration
-        private CookieContainer RmitCookieContainer { get; set; }
+        private CasLoginResult RmitCasLoginResult;
 
         // MainPage constructor
         public MainPage()
@@ -49,38 +51,9 @@ namespace RmiterUwp
 
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            // Declare CasLogin class
-            var casLogin = new CasLogin();
-
             if(UsernameTextbox.Text != "Username" && PasswordTextbox.Password != "Password")
             {
-                // Let the progress ring start to rotate
-                LoginProgressRing.IsActive = true;
-
-                // Run the login and grab the cookies
-                var casLoginResult = await casLogin.RunCasLogin(UsernameTextbox.Text, PasswordTextbox.Password);
-
-                // If CookieContainer is still null, then the login procedure must be somehow failed.
-                if (casLoginResult.CasError != CasLoginError.NoError)
-                {
-                    var errorDialog = new MessageDialog(
-                        string.Format("Login failed! \r\nError code: {0}, Reason: {1} \r\nHTTP Response code: {2}",
-                        Enum.GetName(typeof(CasLoginError), casLoginResult.CasError),
-                        ((int)casLoginResult.CasError).ToString(),
-                        ((int)casLoginResult.HttpResponseStatusCode).ToString()
-                        ), "Error!");
-                    await errorDialog.ShowAsync();
-                }
-                else
-                {
-                    var successfulDialog = new MessageDialog("Login successful!", "Done");
-                    await successfulDialog.ShowAsync();
-                    RmitCookieContainer = casLoginResult.CasCookieContainer;
-                    TimetableTab.IsEnabled = true;
-                    AnnouncementTab.IsEnabled = true;
-                }
-
-                LoginProgressRing.IsActive = false;
+                await DoCasLogin(UsernameTextbox.Text, PasswordTextbox.Password);
             }
             else
             {
@@ -89,10 +62,45 @@ namespace RmiterUwp
             }
         }
 
+        private async Task DoCasLogin(string username, string password)
+        {
+            // Declare CasLogin class
+            var casLogin = new CasLogin();
+
+            // Let the progress ring start to rotate
+            LoginProgressRing.IsActive = true;
+
+            // Run the login and grab the cookies
+            var casLoginResult = await casLogin.RunCasLogin(username, password);
+
+            // If CookieContainer is still null, then the login procedure must be somehow failed.
+            if (casLoginResult.CasError != CasLoginError.NoError)
+            {
+                var errorDialog = new MessageDialog(
+                    string.Format("Login failed! \r\nError code: {0}, Reason: {1} \r\nHTTP Response code: {2}",
+                    Enum.GetName(typeof(CasLoginError), casLoginResult.CasError),
+                    ((int)casLoginResult.CasError).ToString(),
+                    ((int)casLoginResult.HttpResponseStatusCode).ToString()
+                    ), "Error!");
+                await errorDialog.ShowAsync();
+            }
+            else
+            {
+                var successfulDialog = new MessageDialog("Login successful!", "Done");
+                await successfulDialog.ShowAsync();
+                RmitCasLoginResult = casLoginResult;
+                AnnouncementList.ItemsSource = await GetAnnouncementList();
+                TimetableTab.IsEnabled = true;
+                AnnouncementTab.IsEnabled = true;
+            }
+
+            LoginProgressRing.IsActive = false;
+        }
+
         private async Task<List<AnnouncementUIContent>> GetAnnouncementList()
         {
-            var getMyPortal = new MyRmitPortal(RmitCookieContainer);
-            var homeObject = await getMyPortal.GetHomeMessages();
+            var myPortal = new MyRmitPortal(RmitCasLoginResult.CasCookieContainer);
+            var homeObject = await myPortal.GetHomeMessages();
             var announcementUIContent = new List<AnnouncementUIContent>();
 
             foreach(var announcement in homeObject.Announcements)

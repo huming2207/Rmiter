@@ -9,7 +9,7 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Pivot>
-            <PivotItem Header="Account" FontWeight="Bold">
+            <PivotItem x:Name="AccountTab" Header="Account" FontWeight="Bold">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"></RowDefinition>
@@ -26,12 +26,10 @@
                     <TextBox x:Name="UsernameTextbox" Grid.Column="1" HorizontalAlignment="Left" Margin="9,-100,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Width="221" Height="40" FontSize="18" Grid.Row="4"/>
                     <PasswordBox x:Name="PasswordTextbox" Grid.Column="1" HorizontalAlignment="Left" Margin="9,-50,0,0" Password="Password" VerticalAlignment="Top" Width="221" Height="40" FontSize="18" Grid.Row="4"/>
                     <Button x:Name="LoginButton" Content="Login" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="4" VerticalAlignment="Top" Height="50" Width="220" Click="LoginButton_Click"/>
-                    <ProgressRing x:Name="LoginProgressRing" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" Height="70" Margin="-50,126,0,0" VerticalAlignment="Top" Width="70"/>
-                    <TextBlock Grid.Column="1" Grid.Row="4" Margin="30,126,0,320" Text="" TextAlignment="Left" FontSize="25" FontWeight="Normal" VerticalAlignment="Center"/>
-
+                    <ProgressRing x:Name="LoginProgressRing" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" Height="100" Margin="80,-230,0,0" VerticalAlignment="Top" Width="100"/>
                 </Grid>
             </PivotItem>
-            <PivotItem Header="Announcements" FontWeight="Bold" IsEnabled="False">
+            <PivotItem x:Name="AnnouncementTab" Header="Announcements" FontWeight="Bold" IsEnabled="False">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"></RowDefinition>
@@ -49,7 +47,7 @@
                      For the list view, original example came from here:
                        http://stackoverflow.com/questions/33339255/how-to-use-listview-in-universal-windows-platformwindows-10-app 
                     -->
-                    <ListView HorizontalAlignment="Left" Height="714" Margin="143,158,0,0" VerticalAlignment="Top" Width="554" Grid.RowSpan="5">
+                    <ListView HorizontalAlignment="Left" Grid.Column="1" Grid.Row="4" Height="500" Margin="-250,-250,0,0" VerticalAlignment="Top" Width="350" Grid.RowSpan="5" Grid.ColumnSpan="2">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
@@ -59,10 +57,12 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <WebView Grid.Column="1" HorizontalAlignment="Left" Height="714" Margin="10,158,0,0" VerticalAlignment="Top" Width="974" Grid.ColumnSpan="2" Grid.RowSpan="5"/>
+                    <Button Content="Refresh" Grid.Column="2" HorizontalAlignment="Left" Margin="130,200,0,0" VerticalAlignment="Top" Width="95" Height="60"/>
+                    <Button Content="Delete" Grid.Column="2" HorizontalAlignment="Left" Margin="235,200,0,0" VerticalAlignment="Top" Height="60"/>
+                    <WebView Grid.Column="1" HorizontalAlignment="Left" Height="500" Margin="180,266,0,0" VerticalAlignment="Top" Width="362" Grid.ColumnSpan="2" Grid.RowSpan="5"/>
                 </Grid>
             </PivotItem>
-            <PivotItem Header="Timetable" FontWeight="Bold" IsEnabled="False">
+            <PivotItem x:Name="TimetableTab" Header="Timetable" FontWeight="Bold" IsEnabled="False" Margin="10,0,14,0">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"></RowDefinition>
@@ -76,9 +76,11 @@
                         <ColumnDefinition Width="240"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
+
                 </Grid>
             </PivotItem>
         </Pivot>
+
 
 
     </Grid>

@@ -95,7 +95,7 @@ namespace RmiterDemo
             Console.WriteLine("\n[Info] Demo #1 finished, continue on the next one...");
             Console.WriteLine("[Demo #2] Get Carlton library's opening hour, DOES NOT need to login this time.");
 
-            // Test on RmiterCore.LibraryInfo.InfoParser
+            // Test on RmiterCoreUwp.LibraryInfo.InfoParser
             stopWatch.Start();
             var libraryInfoParser = new InfoParser();
             var libraryInfoResult = libraryInfoParser.GetOpeningHours().Result;

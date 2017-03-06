@@ -9,6 +9,7 @@ using System.Diagnostics;
 using Ivony.Html;
 using Ivony.Html.Parser;
 using Ivony.Parser;
+using RmiterCore.Errors;
 
 namespace RmiterCore
 {
@@ -17,7 +18,7 @@ namespace RmiterCore
         // CookieContainer declaration
         private CookieContainer cookieContainer = new CookieContainer();
 
-        public async Task<CookieContainer> RunCasLogin(string username, string password, string pathStr = "/rmitcas/login")
+        public async Task<CasLoginResult> RunCasLogin(string username, string password, string pathStr = "/rmitcas/login")
         {
             var client = _CasHttpClient();
 
@@ -33,16 +34,44 @@ namespace RmiterCore
             var httpResponse = await client.PostAsync(initialResult.RedirectUrl, httpContent);
             string responseStr = await httpResponse.Content.ReadAsStringAsync();
 
-
             Debug.WriteLine("[DEBUG] Login command finished, response: " + responseStr);
 
+            // Scenario #1, return a successful result
             if (responseStr.Contains("Log In Successful") || responseStr.Contains("You have successfully logged into the Central Authentication Service"))
             {
-                return cookieContainer;
+                var loginResult = new CasLoginResult()
+                {
+                    CasCookieContainer = cookieContainer,
+                    CasError = CasLoginError.NoError,
+                    HttpResponseStatusCode = httpResponse.StatusCode
+                };
+
+                return loginResult;
             }
+            // Scenario #2, return username/password invalid result
+            else if (responseStr.Contains("ID or password invalid"))
+            {
+                var loginResult = new CasLoginResult()
+                {
+                    CasCookieContainer = null,
+                    CasError = CasLoginError.UsernameOrPasswordInvalid,
+                    HttpResponseStatusCode = httpResponse.StatusCode
+                };
+
+                return loginResult;
+            }
+
+            // Scenario #3, return network error result
             else
             {
-                return null;
+                var loginResult = new CasLoginResult()
+                {
+                    CasCookieContainer = null,
+                    CasError = CasLoginError.NetworkError,
+                    HttpResponseStatusCode = httpResponse.StatusCode
+                };
+
+                return loginResult;
             }
         }
 

@@ -34,6 +34,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CasLogin.cs" />
+    <Compile Include="CasLoginResult.cs" />
+    <Compile Include="Errors\CasLoginError.cs" />
     <Compile Include="InitialToken.cs" />
     <Compile Include="LibraryInfo\InfoParser.cs" />
     <Compile Include="LibraryInfo\OpeningHours.cs" />

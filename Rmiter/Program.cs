@@ -9,6 +9,7 @@ using System.Security;
 using RmiterCore;
 using RmiterCore.LibraryInfo;
 using RmiterCore.MyRmit;
+using RmiterCore.Errors;
 
 namespace RmiterDemo
 {
@@ -57,7 +58,7 @@ namespace RmiterDemo
 
             // Test login 
             stopWatch.Start();
-            var cookie = casLogin.RunCasLogin(username, password).Result;
+            var casResult = casLogin.RunCasLogin(username, password).Result;
             stopWatch.Stop();
             string casLoginTime = stopWatch.ElapsedMilliseconds.ToString();
             stopWatch.Reset();
@@ -65,13 +66,13 @@ namespace RmiterDemo
             // Clear up the password variable to ensure it's not being (easily) captured later
             password = "";
 
-            if (cookie != null)
+            if (casResult.CasError == CasLoginError.NoError)
             {
                 Console.WriteLine("[Info] Login successful!");
             }
-            else
+            else 
             {
-                Console.WriteLine("[Error] Login failed!");
+                Console.WriteLine("[Error] Login failed, reason: {0}", Enum.GetName(typeof(CasLoginError), casResult.CasError));
                 Console.Read();
                 Environment.Exit(1);
             }
@@ -80,7 +81,7 @@ namespace RmiterDemo
 
             // Test on access myRMIT portal
             stopWatch.Start();
-            var portal = new MyRmitPortal(cookie);
+            var portal = new MyRmitPortal(casResult.CasCookieContainer);
             var homeObject = portal.GetHomeMessages().Result;
             stopWatch.Stop();
             string myRmitTime = stopWatch.ElapsedMilliseconds.ToString();

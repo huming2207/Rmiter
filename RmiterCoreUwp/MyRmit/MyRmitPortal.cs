@@ -35,8 +35,6 @@ namespace RmiterCoreUwp.MyRmit
             return client;
         }
 
-        
-
         private async Task<T> _GetDataAsync<T>(string queryPath)
         {
             var httpResponse = await GetWithManualRedirectionAsync(queryPath);

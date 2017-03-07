@@ -16,6 +16,13 @@ namespace RmiterCoreUwp
         // CookieContainer declaration
         private CookieContainer cookieContainer = new CookieContainer();
 
+        /// <summary>
+        /// Do a RMIT CAS login (at sso-cas.rmit.edu.au)
+        /// </summary>
+        /// <param name="username">Student or Staff ID, starts with "s" or "e". Do not add "@rmit.edu.au"</param>
+        /// <param name="password">User's password</param>
+        /// <param name="pathStr">Specify a custom query path, will be used in future update if RMIT CAS server changes something</param>
+        /// <returns>CAS login result</returns>
         public async Task<CasLoginResult> RunCasLogin(string username, string password, string pathStr = "/rmitcas/login")
         {
             var client = _CasHttpClient();

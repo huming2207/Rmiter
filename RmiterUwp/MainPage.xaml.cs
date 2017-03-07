@@ -125,7 +125,7 @@ namespace RmiterUwp
         // See: http://stackoverflow.com/questions/18153998/how-do-i-remove-all-html-tags-from-a-string-without-knowing-which-tags-are-in-it
         private string GetBriefAnnouncement(string rawText)
         {
-            return (Regex.Replace(rawText, "<.*?>", string.Empty).Substring(0, 15) + "...");
+            return (Regex.Replace(rawText, "<.*?>", string.Empty).Substring(0, 55) + "...");
         }
     }
 }

@@ -89,7 +89,7 @@ namespace RmiterUwp
                 var successfulDialog = new MessageDialog("Login successful!", "Done");
                 await successfulDialog.ShowAsync();
                 RmitCasLoginResult = casLoginResult;
-                AnnouncementList.ItemsSource = await GetAnnouncementList();
+                await GetAnnouncementList();
                 TimetableTab.IsEnabled = true;
                 AnnouncementTab.IsEnabled = true;
             }
@@ -97,7 +97,7 @@ namespace RmiterUwp
             LoginProgressRing.IsActive = false;
         }
 
-        private async Task<List<AnnouncementUIContent>> GetAnnouncementList()
+        private async Task GetAnnouncementList()
         {
             var myPortal = new MyRmitPortal(RmitCasLoginResult.CasCookieContainer);
             var homeObject = await myPortal.GetHomeMessages();
@@ -117,7 +117,7 @@ namespace RmiterUwp
 
             }
 
-            return announcementUIContent;
+            AnnouncementList.ItemsSource = announcementUIContent;
         }
 
         // Since it needs regular expressions (that I'm not quite familiar with)
@@ -125,7 +125,14 @@ namespace RmiterUwp
         // See: http://stackoverflow.com/questions/18153998/how-do-i-remove-all-html-tags-from-a-string-without-knowing-which-tags-are-in-it
         private string GetBriefAnnouncement(string rawText)
         {
-            return (Regex.Replace(rawText, "<.*?>", string.Empty).Substring(0, 55) + "...");
+            return (Regex.Replace(rawText, "<.*?>", string.Empty).Substring(0, 55
+                ) + "...");
+        }
+
+        private void AnnouncementList_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var selectedItem = (AnnouncementUIContent)e.ClickedItem;
+            
         }
     }
 }

@@ -94,7 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnnouncementHandler.cs" />
-    <Compile Include="AnnouncementListContent.cs" />
+    <Compile Include="AnnouncementUIContent.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>

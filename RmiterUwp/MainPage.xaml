@@ -23,10 +23,11 @@
                         <ColumnDefinition Width="240"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox x:Name="UsernameTextbox" Grid.Column="1" HorizontalAlignment="Left" Margin="9,-100,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Width="221" Height="40" FontSize="18" Grid.Row="4"/>
+                    <TextBox x:Name="UsernameTextbox" Grid.Column="1" HorizontalAlignment="Left" Margin="9,-100,0,0" TextWrapping="Wrap" Text="Student/Staff ID" VerticalAlignment="Top" Width="221" Height="40" FontSize="18" Grid.Row="4"/>
                     <PasswordBox x:Name="PasswordTextbox" Grid.Column="1" HorizontalAlignment="Left" Margin="9,-50,0,0" Password="Password" VerticalAlignment="Top" Width="221" Height="40" FontSize="18" Grid.Row="4"/>
                     <Button x:Name="LoginButton" Content="Login" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="4" VerticalAlignment="Top" Height="50" Width="220" Click="LoginButton_Click"/>
                     <ProgressRing x:Name="LoginProgressRing" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" Height="100" Margin="80,-230,0,0" VerticalAlignment="Top" Width="100"/>
+                    <Image x:Name="RmiterLogoImage" Margin="0,127,10,19" Source="ms-appx:///Assets/Logo.png" Stretch="Uniform"   HorizontalAlignment="Right" Width="488" Grid.Column="2" Grid.Row="4"/>
                 </Grid>
             </PivotItem>
             <PivotItem x:Name="AnnouncementTab" Header="Announcements" FontWeight="Bold" IsEnabled="False">
@@ -47,18 +48,18 @@
                      For the list view, original example came from here:
                        http://stackoverflow.com/questions/33339255/how-to-use-listview-in-universal-windows-platformwindows-10-app 
                     -->
-                    <ListView x:Name="AnnouncementList" HorizontalAlignment="Left" Height="653" Margin="0,9,0,0" VerticalAlignment="Top" Width="620" Grid.RowSpan="5" Grid.ColumnSpan="2" ItemClick="AnnouncementList_ItemClick" IsItemClickEnabled="True">
+                    <ListView x:Name="AnnouncementList" HorizontalAlignment="Left" Height="650" Margin="30,9,0,0" VerticalAlignment="Top" Width="550" Grid.RowSpan="5" Grid.ColumnSpan="2" ItemClick="AnnouncementList_ItemClick" IsItemClickEnabled="True">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <TextBlock Text="{Binding Title}" Margin="20,0,20,8" FontSize="24" FontWeight="SemiBold" Foreground="DarkBlue" />
-                                    <TextBlock Text="{Binding BriefContent}" Margin="20,0,20,8" FontSize="16" Foreground="Black"  Opacity="0.5" />
+                                    <TextBlock Text="{Binding Title}" Margin="20,0,20,8" FontSize="22" FontWeight="SemiBold" Foreground="SandyBrown" />
+                                    <TextBlock Text="{Binding BriefContent}" Margin="20,0,20,8" FontSize="15" Foreground="Black"  Opacity="0.5" />
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
 
-                    <WebView x:Name="AnnouncementWebView" Grid.Column="1" HorizontalAlignment="Left" Height="655" Margin="180,7,0,0" VerticalAlignment="Top" Width="519" Grid.ColumnSpan="2" Grid.RowSpan="5"/>
+                    <WebView x:Name="AnnouncementWebView" Grid.Column="1" HorizontalAlignment="Left" Height="650" Margin="115,9,0,0" VerticalAlignment="Top" Width="600" Grid.ColumnSpan="2" Grid.RowSpan="5"/>
                 </Grid>
             </PivotItem>
             <PivotItem x:Name="TimetableTab" Header="Timetable" FontWeight="Bold" IsEnabled="False" Margin="10,0,14,0">

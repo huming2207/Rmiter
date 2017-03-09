@@ -125,14 +125,22 @@ namespace RmiterUwp
         // See: http://stackoverflow.com/questions/18153998/how-do-i-remove-all-html-tags-from-a-string-without-knowing-which-tags-are-in-it
         private string GetBriefAnnouncement(string rawText)
         {
-            return (Regex.Replace(rawText, "<.*?>", string.Empty).Substring(0, 55
-                ) + "...");
+            return (Regex.Replace(rawText, "<.*?>", string.Empty).Substring(0, 55) + "...");
         }
 
-        private void AnnouncementList_ItemClick(object sender, ItemClickEventArgs e)
+        private async void AnnouncementList_ItemClick(object sender, ItemClickEventArgs e)
         {
+            // Cast the selected item
             var selectedItem = (AnnouncementUIContent)e.ClickedItem;
-            
+
+            // Grab the file name
+            string fileNameToRender = await AnnouncementHandler.SaveHtmlStringToFileAsync(selectedItem.FullContent);
+
+            // Do those rendering works with the html file...
+            AnnouncementWebView.Navigate(new Uri(string.Format("ms-appdata:///temp/annoucement-html/{0}", fileNameToRender)));
+
+            // Delete the file to keep user's enviroment clean lol...
+            await AnnouncementHandler.DeleteHtmlFileAsync(fileNameToRender);
         }
     }
 }

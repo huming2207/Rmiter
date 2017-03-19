@@ -10,7 +10,7 @@ An opensource, pure & native .NET/C# library and client for RMIT University onli
 
 ## About this project
 
-### UPDATE - Mar 10, 2017
+### UPDATE - Mar 20, 2017
 
 **This project is temporarily discontinued. After discussing to my teachers, it seems that it is unlikely to approve by the Uni because it can be redistributed with illegal backdoors (e.g. illegally caching/redirecting user data to hackers' server). So unless they approve my work, I won't restart this project.**
 

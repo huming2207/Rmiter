@@ -14,6 +14,7 @@ An opensource, pure & native .NET/C# library and client for RMIT University onli
 
 **This project is temporarily discontinued. After discussing to my teachers, it seems that it is unlikely to approve by the Uni because it can be redistributed with illegal backdoors (e.g. illegally caching/redirecting user data to hackers' server). So unless they approve my work, I won't restart this project.**
 
+**What I hope right now is some day the Uni staff can develop an App, no matter for which online system or can I co-operate with the development team. I do hope I can, but that's impossible I think. I'm just a international student still busy dealing with my assignments, while other local guys thinking I'm just a sicked Chinese nerd showing off all day LOL). As long as the app can REALLY help the students, it will be great and as a student I will support it and love it.**
 
 
 I made this project as I hope I can write a similar [MonashTimetable](http://joshparnham.com/projects/monash-timetable/) app for RMIT University. I've made a python one before but I've got stuck on CAS login simulation. As a result, I gave up that project. But later I tried again in C# with HTML Agility Pack and Jumony HTML parser, and it works as I expected.

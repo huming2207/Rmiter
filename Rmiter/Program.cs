@@ -92,6 +92,15 @@ namespace RmiterDemo
                 Console.WriteLine("[Title] \"{0}\"", announcement.Title);
             }
 
+            Console.WriteLine("\n\n[Info] Try get your first class on Monday...\n");
+            var myTimetable = portal.GetCurrentClassTimetable().Result;
+            Console.WriteLine(string.Format("[Info] Name: {0} , Type: {1}, Start from {2} to {3}.\n\n",
+                myTimetable.WeeklyTimetable[0].DailyTimetable[0].Title,
+                myTimetable.WeeklyTimetable[0].DailyTimetable[0].ActivityType,
+                myTimetable.WeeklyTimetable[0].DailyTimetable[0].StartDisplayable,
+                myTimetable.WeeklyTimetable[0].DailyTimetable[0].EndDisplayable
+                ));
+
             Console.WriteLine("\n[Info] Demo #1 finished, continue on the next one...");
             Console.WriteLine("[Demo #2] Get Carlton library's opening hour, DOES NOT need to login this time.");
 

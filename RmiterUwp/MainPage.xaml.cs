@@ -142,5 +142,6 @@ namespace RmiterUwp
             // Delete the file to keep user's enviroment clean lol...
             await AnnouncementHandler.DeleteHtmlFileAsync(fileNameToRender);
         }
+  
     }
 }

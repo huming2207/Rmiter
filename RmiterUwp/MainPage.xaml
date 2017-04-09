@@ -62,20 +62,163 @@
                     <WebView x:Name="AnnouncementWebView" Grid.Column="1" HorizontalAlignment="Left" Height="650" Margin="115,9,0,0" VerticalAlignment="Top" Width="600" Grid.ColumnSpan="2" Grid.RowSpan="5"/>
                 </Grid>
             </PivotItem>
+            
+            <!--Timetable Tab (WIP)-->
             <PivotItem x:Name="TimetableTab" Header="Timetable" FontWeight="Bold" IsEnabled="False" Margin="10,0,14,0">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="50*"/>
+                        <RowDefinition Height="250*"/>
+                        <RowDefinition Height="50*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="240"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="150*"/>
+                        <ColumnDefinition Width="955*"/>
+                        <ColumnDefinition Width="150*"/>
                     </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" >
+                        <StackPanel Width="136">
+                            <TextBlock Text="Monday" Width="136" HorizontalAlignment="Left" FontSize="20" TextAlignment="Center" />
+                            
+                            <ListView x:Name="MondayTimetableListView">
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <ItemsStackPanel  VerticalAlignment="Top"/>
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel VerticalAlignment="Top" Width="136">
+                                            <TextBlock Text="{Binding CourseName}" VerticalAlignment="Top" FontSize="15"/>
+                                            <TextBlock Text="{Binding CourseDuration}" VerticalAlignment="Top" FontSize="10"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                            
+                        </StackPanel>
+                        <StackPanel Width="136">
+                            <TextBlock Text="Tuesday" Width="136" HorizontalAlignment="Left" FontSize="20" TextAlignment="Center" />
+                            <ListView x:Name="TuesdayTimetableListView">
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <ItemsStackPanel  VerticalAlignment="Top"/>
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel VerticalAlignment="Top" Width="136">
+                                            <TextBlock Text="{Binding CourseName}" VerticalAlignment="Top" FontSize="15"/>
+                                            <TextBlock Text="{Binding CourseDuration}" VerticalAlignment="Top" FontSize="10"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+
+                        </StackPanel>
+                        <StackPanel Width="136">
+                            <TextBlock Text="Wednesday" Width="136" HorizontalAlignment="Left" FontSize="20" TextAlignment="Center" />
+
+                            <ListView x:Name="WednesdayTimetableListView">
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <ItemsStackPanel  VerticalAlignment="Top"/>
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel VerticalAlignment="Top" Width="136">
+                                            <TextBlock Text="{Binding CourseName}" VerticalAlignment="Top" FontSize="15"/>
+                                            <TextBlock Text="{Binding CourseDuration}" VerticalAlignment="Top" FontSize="10"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+
+                        </StackPanel>
+                        <StackPanel Width="136">
+                            <TextBlock Text="Thursday" Width="136" HorizontalAlignment="Left" FontSize="20" TextAlignment="Center" />
+
+                            <ListView x:Name="ThursdayTimetableListView">
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <ItemsStackPanel  VerticalAlignment="Top"/>
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel VerticalAlignment="Top" Width="136">
+                                            <TextBlock Text="{Binding CourseName}" VerticalAlignment="Top" FontSize="15"/>
+                                            <TextBlock Text="{Binding CourseDuration}" VerticalAlignment="Top" FontSize="10"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+
+                        </StackPanel>
+                        <StackPanel Width="136">
+                            <TextBlock Text="Friday" Width="136" HorizontalAlignment="Left" FontSize="20" TextAlignment="Center" />
+
+                            <ListView x:Name="FridayTimetableListView">
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <ItemsStackPanel  VerticalAlignment="Top"/>
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel VerticalAlignment="Top" Width="136">
+                                            <TextBlock Text="{Binding CourseName}" VerticalAlignment="Top" FontSize="15"/>
+                                            <TextBlock Text="{Binding CourseDuration}" VerticalAlignment="Top" FontSize="10"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+
+                        </StackPanel>
+                        <StackPanel Width="136">
+                            <TextBlock Text="Saturday" Width="136" HorizontalAlignment="Left" FontSize="20" TextAlignment="Center" />
+
+                            <ListView x:Name="SaturdayTimetableListView">
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <ItemsStackPanel  VerticalAlignment="Top"/>
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel VerticalAlignment="Top" Width="136">
+                                            <TextBlock Text="{Binding CourseName}" VerticalAlignment="Top" FontSize="15"/>
+                                            <TextBlock Text="{Binding CourseDuration}" VerticalAlignment="Top" FontSize="10"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+
+                        </StackPanel>
+                        <StackPanel Width="136">
+                            <TextBlock Text="Sunday" Width="136" HorizontalAlignment="Left" FontSize="20" TextAlignment="Center" />
+
+                            <ListView x:Name="SundayTimetableListView">
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <ItemsStackPanel  VerticalAlignment="Top"/>
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel VerticalAlignment="Top" Width="136">
+                                            <TextBlock Text="{Binding CourseName}" VerticalAlignment="Top" FontSize="15"/>
+                                            <TextBlock Text="{Binding CourseDuration}" VerticalAlignment="Top" FontSize="10"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+
+                        </StackPanel>
+                    </StackPanel>
+                   
 
                 </Grid>
             </PivotItem>

@@ -113,59 +113,6 @@ namespace RmiterCore.MyTimetable
         }
 
         /// <summary>
-        /// Do allocation, assume it can be allocated.
-        /// </summary>
-        /// <param name="subjectCode"></param>
-        /// <param name="activityGroupCode"></param>
-        /// <param name="activityCode"></param>
-        /// <returns></returns>
-        public async Task<AllocateResult> DoAllocation(string subjectCode, string activityGroupCode,
-            string activityCode)
-        {
-            if (casLoginResult.CasError != CasLoginError.NoError)
-            {
-                return new AllocateResult() {Success = false, Message = "Login token invalid, please retry login."};
-            }
-
-            var clientHandler = new HttpClientHandler()
-            {
-                CookieContainer = casLoginResult.CasCookieContainer
-            };
-
-            var httpClient = new HttpClient(clientHandler)
-            {
-                BaseAddress = new Uri("https://mytimetable.rmit.edu.au")
-            };
-            
-            // Prepare POST content
-            var postContent = new StringContent(
-                Uri.EscapeDataString(
-                    $"token=a&student_code={casLoginResult.UserName}&subject_code={subjectCode}&" +
-                    $"activity_group_code={activityGroupCode}&activity_code={activityCode}"),
-                Encoding.UTF8, "application/x-www-form-urlencoded");
-            
-            // Fire the hole! Fingercross and see if it works...
-            var postResult = await httpClient.PostAsync(
-                string.Format("/odd/rest/student/changeActivity/?ss={0}", siteToken),
-                postContent);
-            
-            // Convert result
-            if (postResult.IsSuccessStatusCode)
-            {
-                return JsonConvert.DeserializeObject<AllocateResult>(await postResult.Content.ReadAsStringAsync());
-            }
-            else
-            {
-                return new AllocateResult()
-                {
-                    Success = false,
-                    Message = "Your query to myTimetable server is dead."
-                };
-            }
-
-        }
-
-        /// <summary>
         /// Grab a site token
         /// </summary>
         /// <returns></returns>

@@ -27,5 +27,20 @@ namespace RmiterCore
         /// Detailed status code, helps user to solve connectivity issues
         /// </summary>
         public HttpStatusCode HttpResponseStatusCode { get; set; }
+        
+        /// <summary>
+        /// Student/Staff ID, only exists if login success, otherwise remains null.
+        /// </summary>
+        public string UserName { get; set; }
+        
+        /// <summary>
+        /// Account password, only exists if login success, otherwise remains null.
+        /// </summary>
+        public string Password { get; set; }
+        
+        /// <summary>
+        /// (Unused so far) Unified user agent
+        /// </summary>
+        public string UserAgent { get; set; }
     }
 }

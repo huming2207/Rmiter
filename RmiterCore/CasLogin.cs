@@ -31,13 +31,13 @@ namespace RmiterCore
             var initialResult = await _GetInitialToken(client);
 
             // Post content, including username, password, LT token and something else
-            string postContent =
+            var postContent =
                string.Format("username={0}&password={1}&lt={2}&execution=e1s1&_eventId=submit&submit=Login",
                 Uri.EscapeDataString(username), Uri.EscapeDataString(password), initialResult.LtToken);
 
-            HttpContent httpContent = new StringContent(postContent, Encoding.UTF8, "application/x-www-form-urlencoded");
+            var httpContent = new StringContent(postContent, Encoding.UTF8, "application/x-www-form-urlencoded");
             var httpResponse = await client.PostAsync(initialResult.RedirectUrl, httpContent);
-            string responseStr = await httpResponse.Content.ReadAsStringAsync();
+            var responseStr = await httpResponse.Content.ReadAsStringAsync();
 
             // Scenario #1, return a successful result
             if (responseStr.Contains("Log In Successful") || responseStr.Contains("You have successfully logged into the Central Authentication Service"))
@@ -46,7 +46,9 @@ namespace RmiterCore
                 {
                     CasCookieContainer = cookieContainer,
                     CasError = CasLoginError.NoError,
-                    HttpResponseStatusCode = httpResponse.StatusCode
+                    HttpResponseStatusCode = httpResponse.StatusCode,
+                    UserName = username,
+                    Password = password
                 };
 
                 return loginResult;

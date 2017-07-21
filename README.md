@@ -10,10 +10,9 @@ An open source, pure & native .NET/C# library and client for RMIT University onl
 	- 1. Developer who use the code contains in this project **should NOT** make any illegal hacking purpose changes, for example, hacking other students or staffs' account;
 	- 2. Developer who use the code contains in this project **should NOT** abuse any school server's API, e.g. performs more than 1 query per second (which is way faster than normal human being).
 	- 3. Developer who use the code contains in this project **should NOT** violate any other Australian and/or Mainland Chinese laws or regulations, e.g. use proxy when you've got firewalled in mainland China. 😂
-	- 4. **Developer should never, ever, use my code to make cheating programs on some online services, e.g. writing an unfair app that can help certain users choose a course automatically.**
+	- 4. **Developer should never, ever, use my code to make cheating or impolite programs on some online services, e.g. writing an unfair app or plugin, which can help certain users choose a course automatically in a short time.**
 
 - If bugs from APIs are found, **please report to the Uni ASAP in order to protect our own cyber security.** If something goes wrong with my code, please feel free to post an issue in this project page.
-
 
 
 ## Features

@@ -65,8 +65,22 @@ namespace RmiterCore
 
                 return loginResult;
             }
+            // Scenario #3, if password is going to expired...
+            else if (responseStr.Contains("Your password expires in"))
+            {
+                var loginResult = new CasLoginResult()
+                {
+                    CasCookieContainer = cookieContainer,
+                    CasError = CasLoginError.UserPasswordAboutToExpire,
+                    HttpResponseStatusCode = httpResponse.StatusCode,
+                    UserName = username,
+                    Password = password
+                };
 
-            // Scenario #3, return network error result
+                return loginResult;
+            }
+
+            // Scenario #4, return network error result
             else
             {
                 var loginResult = new CasLoginResult()

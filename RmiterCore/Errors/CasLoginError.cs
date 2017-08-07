@@ -10,6 +10,7 @@ namespace RmiterCore.Errors
     {
         NoError                     = 0,
         UsernameOrPasswordInvalid   = 1,
+        UserPasswordAboutToExpire   = 2,
         NetworkError                = -1
     }
 }

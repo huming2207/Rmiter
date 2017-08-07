@@ -86,8 +86,8 @@ namespace RmiterCore.MyTimetable
             
             // Test if it available first...
             var activityListResponse = await httpClient.GetAsync(
-                string.Format("/odd/rest/student/{0}/subject/{1}/group/{2}/activities/?ss={3}", 
-                casLoginResult.UserName, subjectCode, activityGroupCode, siteToken));
+                $"/odd/rest/student/{casLoginResult.UserName}/subject/{subjectCode}" +
+                $"/group/{activityGroupCode}/activities/?ss={siteToken}");
 
             if (!activityListResponse.IsSuccessStatusCode)
             {
